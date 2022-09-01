@@ -2,8 +2,7 @@ import { InvalidNumberError } from "./Errors";
 
 
 export class FibonacciNumber {
-    succession = [0, 1];
-
+    private sequence = [0, 1];
     private static instance: FibonacciNumber;
 
     constructor() {
@@ -12,28 +11,29 @@ export class FibonacciNumber {
         }
         FibonacciNumber.instance = this;
     }
-    
-    get(n: number): number {
-        this.validate(n);
-        
-        if (n < this.succession.length) {
-            return this.succession[n];
+
+    get_nth(nthNumber: number): number {
+        this.validate(nthNumber);
+
+        if (nthNumber > this.sequence.length) {
+            this.addSequenceNumbersToReachNth(nthNumber);            
         }
     
-        for (let i = this.succession.length; i <= n; i++) {
-            const next = this.succession[i - 1] + this.succession[i - 2];
-            this.succession.push(next);
-        }
-    
-        return this.succession[n];
+        const nthRequiredNumberPosition = nthNumber - 1;
+        return this.sequence[nthRequiredNumberPosition];
     }
 
-    validate(n: number) {
-        if (n < 0) {
-            throw new InvalidNumberError("n must be positive or zero");
+    private addSequenceNumbersToReachNth(nthRequiredNumber: number) {
+        for (let nth = this.sequence.length; nth <= nthRequiredNumber; nth++) {
+            const newNthNumber = this.sequence[nth - 1] + this.sequence[nth - 2];
+            this.sequence.push(newNthNumber);
         }
-        if (!Number.isInteger(n)) {
-            throw new InvalidNumberError('n must be a natural number');
-        }
+    }
+
+    private validate(n: number) {
+        const isNaturalNumber = Number.isInteger(n);
+        const isZeroOrLess = n <= 0;
+
+        if (!isNaturalNumber || isZeroOrLess) throw new InvalidNumberError('n must be a natural number greater than zero');
     }
 }
