@@ -25,7 +25,7 @@ describe('Testing PrimeNumber function', () => {
         expect(Prime.is_prime(10)).toBe(false);
     });
 
-    test("Method get_nth can't be called only with natural numbers", () => {
+    test("Method get_nth can be called only with natural numbers greaten than zero", () => {
         expect(() => Prime.get_nth(1.5)).toThrowError('n must be a natural number greater than zero');
         expect(() => Prime.get_nth(0)).toThrowError('n must be a natural number greater than zero');
         expect(() => Prime.get_nth(-1)).toThrowError('n must be a natural number greater than zero');
