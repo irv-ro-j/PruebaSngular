@@ -1,18 +1,25 @@
 import { InvalidNumberError } from "./Errors";
 
-class TriangularNumberValidator {
-    static validate(n: number) {
-        if (n <= 0) {
-            throw new InvalidNumberError('n must be greater than 0');
+export class TriangularNumber {
+    private static instance: TriangularNumber;
+
+    constructor() {
+        if (TriangularNumber.instance) {
+            return TriangularNumber.instance;
         }
-        if (!Number.isInteger(n)) {
-            throw new InvalidNumberError('n must be a natural number');
-        }
+        TriangularNumber.instance = this;
     }
-}
 
-export const TriangularNumber = (n: number) => {
-    TriangularNumberValidator.validate(n);
+    get_nth(n: number) {
+        this.validate(n);
 
-    return n * (n + 1) / 2;
+        return n * (n + 1) / 2;
+    }
+
+    private validate(n: number) {
+        const isNaturalNumber = Number.isInteger(n);
+        const isZeroOrLess = n <= 0;
+
+        if (!isNaturalNumber || isZeroOrLess) throw new InvalidNumberError('n must be a natural number greater than zero');
+    }
 }
