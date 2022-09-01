@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+h1 {
+    @apply text-purple-900 font-bold text-5xl;
+}
+
+h2 {
+    @apply text-slate-900 font-bold text-3xl my-5;
+}
+
+p > span {
+    color: purple;
+}
+
+h1 > span, h2 > span, h3 > span {
+    @apply font-bold text-purple-900;
+}
+
+input {
+    @apply border-2 border-purple-900 rounded-lg p-2;
+}
+
+.alert {
+    border-width: 3px;
+    @apply flex justify-between text-center rounded-md px-5 md:px-10 py-2 shadow-md shadow-slate-100 leading-5 font-normal;
+}
+
+.alert-light {
+    @apply border-slate-200;
+}
+
+.alert-success {
+    @apply border-lime-500;
+}
+
+.alert-info {
+    @apply border-slate-400;
+}
+
+.alert-warning {
+    @apply border-amber-500;
+}
+
+.alert-danger {
+    @apply border-red-500;
+}
